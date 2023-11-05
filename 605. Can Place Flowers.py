@@ -1,53 +1,26 @@
 
 class Solution:
     def canPlaceFlowers(self, flowerbed: list[int], n: int) -> bool:
+        # if there is no flower to put we consider it as True
+        if n == 0:
+            return True
+
         is_flower_place_possible = True
-        #
-        # if n == 0:
-        #     return True
-        # if n == 1 and len(flowerbed) == 1 and flowerbed[0] == 1:
-        #     return False
-        # if n == 1 and len(flowerbed) == 1 and flowerbed[0] == 0:
-        #     return True
-        #
-        # for i in range(len(flowerbed)):
-        #     # if the pattern is 0, 0, 1 at the very beginning of the iteration
-        #     if i == 0 and flowerbed[i] == flowerbed[i+1] == 0 and flowerbed[i+2] == 1:
-        #         flowerbed[i] = 1
-        #         n -= 1
-        #         if n == 0:
-        #             break
-        #
-        #     # if the pattern is 0, 0, 0 and it is the general case
-        #     elif i < len(flowerbed) - 2 and flowerbed[i] == flowerbed[i+1] == flowerbed[i+2] == 0:
-        #         flowerbed[i+1] = 1
-        #         n -= 1
-        #         if n == 0:
-        #             break
-        #
-        #     # if the pattern is 1, 0, 0 at the very end of the iteration
-        #     elif i == len(flowerbed) - 3 and flowerbed[i] == 1 and flowerbed[i + 1] == flowerbed[i + 2] == 0:
-        #         flowerbed[i] = 1
-        #         n -= 1
-        #         if n == 0:
-        #             break
-        #
-        # if n != 0:
-        #     is_flower_place_possible = False
 
-        for i in range(1, len(flowerbed)):
-            if flowerbed[i] == 0 and flowerbed[i-1] == 0:
-                flowerbed[i] = 1
+        # all the cases can be covered or put in the general case by just adding 0 at the beginning and end of the list
+        flowerbed.insert(0, 0)
+        flowerbed.append(0)
+
+        for i in range(len(flowerbed)):
+            # if the pattern is 0, 0, 0 and it is the general case
+            if i < len(flowerbed) - 2 and flowerbed[i] == flowerbed[i+1] == flowerbed[i+2] == 0:
+                flowerbed[i+1] = 1
                 n -= 1
                 if n == 0:
                     break
 
-        for i in range(len(flowerbed)-2, -1, -1):
-            if flowerbed[i] == 0 and flowerbed[i-1] == 0:
-                flowerbed[i] = 1
-                n -= 1
-                if n == 0:
-                    break
+        if n != 0:
+            is_flower_place_possible = False
 
         return is_flower_place_possible
 
