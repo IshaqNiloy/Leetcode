@@ -1,5 +1,4 @@
 from typing import List, Optional
-
 from main import ListNode
 
 
@@ -11,28 +10,34 @@ class ListNode:
 
 
 class Solution:
-    @staticmethod
-    def find_the_length(head: Optional[ListNode]) -> int:
-        length = 0
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        node_stack = []
+
         while head:
-            length += 1
+            node_stack.append(head)
             head = head.next
 
-        return length
-
-    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        linked_list_length = self.find_the_length(head=head)
-        current = head
-        if n == 1 and linked_list_length == 1:
+        # if the linked list has only one node
+        if n == 1 and len(node_stack) == 1:
             return None
-        for i in range(0, (linked_list_length - n)):
-            if i != (linked_list_length - n) - 1:
-                head = head.next
-        print(head.next)
-        if head.next:
-            head.next = head.next.next
 
-        return current
+        # if head is asked to be deleted
+        if n == len(node_stack):
+            return node_stack[1]
+
+        deleted_node = None
+        for i in range(0, n):
+            deleted_node = node_stack.pop()
+
+        node_before_deleted_node = node_stack.pop()
+        node_before_deleted_node.next = deleted_node.next
+
+        # if the list becomes empty then the last item that has been deleted is the head of the linked list
+        if not len(node_stack):
+            return node_before_deleted_node
+
+        # returns the first item of the list which is the head
+        return node_stack[0]
 
 
 if __name__ == '__main__':
