@@ -9,7 +9,6 @@ logger.addHandler(handler)
 
 class Solution:
     def closeStrings(self, word1: str, word2: str) -> bool:
-        word1_dict, word2_dict = dict(), dict()
         try:
             # words have to be of the same length and there shouldn't be any unique character
             if len(word1) != len(word2) or set(list(word1)) != set(list(word2)):
