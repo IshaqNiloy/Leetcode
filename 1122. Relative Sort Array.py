@@ -19,12 +19,15 @@ class Solution:
                 else:
                     num_frequency_mapping[item].append(item)
 
+                if item not in arr2:
+                    sorted_nums.append(item)
+
             logger.info(f'number frequency mapping: {num_frequency_mapping}')
 
             for num in arr2:
                 result += num_frequency_mapping[num]
 
-            sorted_nums = sorted([item for item in arr1 if item not in arr2])
+            sorted_nums.sort()
 
             logger.info(f'sorted list: {sorted_nums}')
             return result + sorted_nums
@@ -34,4 +37,4 @@ class Solution:
 
 if __name__ == '__main__':
     s = Solution()
-    logger.info(f'result: {s.relativeSortArray(arr1 = [2,3,1,3,2,4,6,7,9,2,19], arr2 = [2,1,4,3,9,6])}')
+    logger.info(f'result: {s.relativeSortArray(arr1 = [28,6,22,8,44,17], arr2 = [22,28,8,6])}')
