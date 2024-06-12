@@ -30,6 +30,7 @@ class Solution:
             sorted_nums.sort()
 
             logger.info(f'sorted list: {sorted_nums}')
+
             return result + sorted_nums
         except Exception as e:
             logger.info(f'exception: {e}')
