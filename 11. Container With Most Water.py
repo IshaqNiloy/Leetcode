@@ -1,7 +1,33 @@
-You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+import logging
 
-Find two lines that together with the x-axis form a container, such that the container contains the most water.
+from typing import List
 
-Return the maximum amount of water a container can store.
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+handler = logging.StreamHandler()
+logger.addHandler(handler)
 
-Notice that you may not slant the container.
+
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        # two pointers approach
+        max_area, left_pointer, right_pointer = 0, 0, len(height) - 1
+
+        try:
+            while left_pointer < right_pointer:
+                max_area = max(max_area, min(height[right_pointer], height[left_pointer]) * (right_pointer - left_pointer))
+
+                if height[left_pointer] < height[right_pointer]:
+                    left_pointer += 1
+                else:
+                    right_pointer -= 1
+
+            return max_area
+
+        except Exception as e:
+            logger.exception(f'exception: {e}')
+
+
+if __name__ == '__main__':
+    s = Solution()
+    logger.info(s.maxArea([1, 2]))
