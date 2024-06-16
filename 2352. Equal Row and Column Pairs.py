@@ -13,10 +13,11 @@ class Solution:
         row_map, col_map, equal_pair_counter, full_col = dict(), dict(), 0, list()
         try:
             for row in grid:
-                if tuple(row) not in row_map:
-                    row_map[tuple(row)] = 1
+                row = tuple(row)
+                if row not in row_map:
+                    row_map[row] = 1
                 else:
-                    row_map[tuple(row)] += 1
+                    row_map[row] += 1
 
             logger.info(f'row column map: {row_map}')
             row, col = 0, 0
@@ -26,10 +27,11 @@ class Solution:
                     full_col.append(grid[row][col])
 
                     if row == len(grid) - 1:
-                        if tuple(full_col) not in col_map:
-                            col_map[tuple(full_col)] = 1
+                        full_col = tuple(full_col)
+                        if full_col not in col_map:
+                            col_map[full_col] = 1
                         else:
-                            col_map[tuple(full_col)] += 1
+                            col_map[full_col] += 1
 
                     row += 1
 
