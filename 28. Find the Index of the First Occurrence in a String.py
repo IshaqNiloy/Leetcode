@@ -10,7 +10,6 @@ class Solution:
         end_pointer = len(needle)
 
         while end_pointer <= len(haystack):
-            print(haystack[start_pointer:end_pointer])
             if haystack[start_pointer:end_pointer] == needle:
                 return start_pointer
             else:
