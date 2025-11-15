@@ -11,11 +11,12 @@ function isValidSudoku(board: string[][]): boolean {
           numberFrequencyMapping[num] = 1;
         }
       }
-      // Check if the the row has any duplicate number
-      if (numberFrequencyMapping["."] === 9) {
-        return false;
-      }
+      /*
+      There can be multiple dots that represent empty spaces.
+      So we need to ignore them.
+      */
       delete numberFrequencyMapping["."];
+      // Check if the the row has any duplicate number
       if (
         Object.values(numberFrequencyMapping).some((count: any) => count > 1)
       ) {
@@ -34,9 +35,6 @@ function isValidSudoku(board: string[][]): boolean {
         }
       }
       // Check if the the column has any duplicate number
-      if (numberFrequencyMapping["."] === 9) {
-        return false;
-      }
       delete numberFrequencyMapping["."];
       if (
         Object.values(numberFrequencyMapping).some((count: any) => count > 1)
